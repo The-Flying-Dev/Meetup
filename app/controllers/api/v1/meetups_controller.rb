@@ -1,41 +1,46 @@
 class Api::V1::MeetupsController < ApplicationController
+  before_action :set_meetup, only: [:show, :update, :destroy]
+
   def index
-    meetup = Meetup.all.order(created_at: :desc)
-    render json: meetup
+    @meetup = Meetup.all.order(created_at: :desc)
+    render json: @meetups
+  end
+
+  def show    
+    render json: @meetup   
   end
 
   def create
-    meetup = Meetup.create!(meetup_params)
-    if meetup 
-      render json: meetup
+    @meetup = Meetup.new(meetup_params)
+    if @meetup.save 
+      render json: @meetup
     else   
-      render json: meetup.errors
+      render json: @meetup.errors, status: :unprocessable_entity
     end
   end
 
-  def show
-    if meetup 
-      render json: meetup
+  def update 
+    if @meetup.update(meetup_params)
+      render json: @meetup, status: :ok, location: api_v1_meetup_path(@meetup)
     else   
-      render json: meetup.errors
+      render json: @meetup.errors, status: :unprocessable_entity
     end
   end
 
   # &. -> Safe Navigation Operator, checks the value exists before calling the destroy method
   def destroy
-    meetup&.destroy
+    @meetup&.destroy
     render json: { message: 'Meetup was successfully deleted' }
   end
 
-  private 
+  private   
+
+  def set_meetup 
+    @meetup = Meetup.find(params[:id])
+  end
 
   def meetup_params 
     params.permit(:meetup).require(:title, :address, :description, :image)
-  end
-
-  # ||= will not return undefined if the object does not exist
-  def meetup 
-    @meetup ||= Meetup.find(params[:id])
   end
 
 end
