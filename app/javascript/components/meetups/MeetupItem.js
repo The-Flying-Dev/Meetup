@@ -8,7 +8,7 @@ function MeetupItem(props) {
    
 
   return (
-    <li className={classes.item}>
+    <li key={props.id} className={classes.item}>
       <Card>
         <div className={classes.image}>
           <img src={props.image} alt={props.title} />
@@ -18,8 +18,8 @@ function MeetupItem(props) {
           <address>{props.address}</address>
           <p>{props.description}</p>
         </div>       
-        
       </Card>
+      <Link to={`/meetups/${props.id}`}>View Details</Link>
     </li>
   );
 }

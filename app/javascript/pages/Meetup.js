@@ -11,7 +11,7 @@ function Meetup() {
   const [singleMeetup, setSingleMeetup] = useState({});
   const { id } = useParams();  
   
-
+  //fetching individual Meetup
   //after data is fetched using Rails meetups_controller.rb as the api, set isLoading to false 
   useEffect(() => {
     setIsLoading(true);
@@ -38,7 +38,7 @@ function Meetup() {
     );
   }
 
-  //pass the data as attribute
+  //render the data as single list item
   return (
     <div>
       <ul>
