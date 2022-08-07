@@ -6,8 +6,12 @@ class Api::V1::MeetupsController < ApplicationController
     render json: @meetups
   end
 
-  def show    
-    render json: @meetup   
+  def show   
+    if @meetup
+      render json: @meetup   
+    else  
+      render json: @meetup.errors, status: :unprocessable_entity
+    end 
   end
 
   def create
@@ -40,7 +44,7 @@ class Api::V1::MeetupsController < ApplicationController
   end
 
   def meetup_params 
-    params.permit(:meetup).require(:title, :address, :description, :image)
+    params.require(:meetup).permit(:title, :address, :description, :image)
   end
 
 end
