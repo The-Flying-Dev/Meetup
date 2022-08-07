@@ -2,7 +2,7 @@ class Api::V1::MeetupsController < ApplicationController
   before_action :set_meetup, only: [:show, :update, :destroy]
 
   def index
-    @meetup = Meetup.all.order(created_at: :desc)
+    @meetups = Meetup.all.order(created_at: :desc)
     render json: @meetups
   end
 
