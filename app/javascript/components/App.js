@@ -13,7 +13,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/meetups' element={<AllMeetups />} />      
           <Route path='/new-meetup' element={<NewMeetup />} />
-          <Route path='/meetup' element={<Meetup />} />
+          <Route path='/meetups/:id' element={<Meetup />} />
         </Routes>
       </Layout>    
   );
