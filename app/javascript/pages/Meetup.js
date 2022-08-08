@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import Card from "../components/ui/Card";
 import classes from "../components/meetups/MeetupItem.module.css";
 
@@ -8,9 +8,10 @@ function Meetup() {
 
   //initial states
   const [isLoading, setIsLoading] = useState(true);
-  const [singleMeetup, setSingleMeetup] = useState({});
+  const [singleMeetup, setSingleMeetup] = useState({});  
+
   const { id } = useParams();  
-  
+  const history = useNavigate();
   //fetching individual Meetup
   //after data is fetched using Rails meetups_controller.rb as the api, set isLoading to false 
   useEffect(() => {
@@ -26,6 +27,18 @@ function Meetup() {
       .then(data => setSingleMeetup(data));
       setIsLoading(false);
   }, [id]);
+
+
+  //delete a meetup
+  function deleteMeetupHandler() {
+    const apiUrl = `/api/v1/meetups/${id}`;
+    fetch(apiUrl,     
+      {
+        method: 'DELETE',       
+      }
+    )
+    onDelete(id)
+  }
 
 
   //this will load momentarily while the data is being fetched
@@ -56,6 +69,7 @@ function Meetup() {
         </li>
       </ul>
       <Link to='/meetups'>Back to meetups</Link>
+      <button onClick={(e) => deleteMeetupHandler(e)}>Delete Meetup</button>
     </div>
   );
 }
