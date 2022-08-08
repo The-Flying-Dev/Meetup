@@ -6,7 +6,7 @@ function NewMeetup() {
 
   const history = useNavigate();
    
-  //this function gets passed as prop to NewMeetupForm
+  //Post request to create new meetup, this function gets passed as prop to NewMeetupForm
   function addMeetupHandler(meetupData) {
     const apiUrl = "/api/v1/meetups";
     fetch(apiUrl,

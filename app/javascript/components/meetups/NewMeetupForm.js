@@ -28,9 +28,9 @@ function NewMeetupForm(props) {
       description: enteredDescription,
     };
 
-    console.log(meetupData);
+    
     //coming from NewMeetup.js
-    props.onAddMeetup(meetupData);
+    props.onAddMeetup(meetupData);    
 
   }
 
@@ -61,7 +61,7 @@ function NewMeetupForm(props) {
           ></textarea>
         </div>
         <div className={classes.actions}>
-          <button>Add Meetup</button>
+          <button>Submit</button>
         </div>
       </form>
     </Card>

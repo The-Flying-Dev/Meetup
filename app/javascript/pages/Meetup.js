@@ -12,6 +12,7 @@ function Meetup() {
 
   const { id } = useParams();  
   const history = useNavigate();
+
   //fetching individual Meetup
   //after data is fetched using Rails meetups_controller.rb as the api, set isLoading to false 
   useEffect(() => {
@@ -34,13 +35,18 @@ function Meetup() {
     const apiUrl = `/api/v1/meetups/${id}`;
     fetch(apiUrl,     
       {
-        method: 'DELETE',       
+        method: 'DELETE', 
+        headers: {
+          'Content-Type': 'application/json'
+        }      
       }
-    )
-    onDelete(id)
+    ).then(() => {
+      window.alert('Meetup Deleted!');
+      history("/meetups");
+    });    
   }
 
-
+ 
   //this will load momentarily while the data is being fetched
 
   if (isLoading) {
@@ -68,8 +74,9 @@ function Meetup() {
           </Card>          
         </li>
       </ul>
-      <Link to='/meetups'>Back to meetups</Link>
-      <button onClick={(e) => deleteMeetupHandler(e)}>Delete Meetup</button>
+      <Link to='/meetups'><button>Back to Meetups</button></Link>
+      <button onClick={deleteMeetupHandler}>Delete Meetup</button>
+      <Link to={`/meetups/${id}/edit`}>Update Meetup</Link>
     </div>
   );
 }

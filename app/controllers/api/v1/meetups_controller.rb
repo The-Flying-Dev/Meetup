@@ -25,7 +25,7 @@ class Api::V1::MeetupsController < ApplicationController
 
   def update 
     if @meetup.update(meetup_params)
-      render json: @meetup, status: :ok, location: api_v1_meetup_path(@meetup)
+      render json: @meetup
     else   
       render json: @meetup.errors, status: :unprocessable_entity
     end
