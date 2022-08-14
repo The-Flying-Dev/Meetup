@@ -5,20 +5,29 @@ import classes from './NewMeetupForm.module.css';
 import Card from "../ui/Card";
 
 function EditMeetup() {
-  const [singleMeetup, setSingleMeetup] = useState([]);
+  const [singleMeetup, setSingleMeetup] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();  
   const history = useNavigate();
 
-  useEffect(async () => {
-    let result = await fetch(`/api/v1/meetups/${id}`);
-    result = await result.json();
-    setSingleMeetup(result);
-  }, [])
+  useEffect(() => {
+    setIsLoading(true);
+    const apiUrl = `/api/v1/meetups/${id}`;
+    fetch(apiUrl)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Network response was not ok");
+      })
+      .then(data => setSingleMeetup(data));
+      setIsLoading(false);
+  }, [id]);
 
   
     function updateMeetupHandler(e) {
       e.preventDefault();
-      const apiUrl = `/api/v1/meetups/${id}`;
+      const apiUrl = `/api/v1/meetups/${id}/update`;
       fetch(apiUrl,     
         {
           method: 'PUT',           
@@ -32,6 +41,14 @@ function EditMeetup() {
       });    
     }
   
+
+  if (isLoading) {
+    return (
+      <section>
+        <p>Loading...</p>
+      </section>
+    );
+  }
 
   return (
     <Card>

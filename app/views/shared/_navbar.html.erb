@@ -1,0 +1,28 @@
+<!-- navbar -->
+
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container-fluid">
+    <a><%= link_to "Home", root_path %></a> |    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+      data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+
+        <% if user_signed_in? %>    
+
+          <a><%= link_to "Logout", destroy_user_session_path, method: :delete %></a>
+
+        <% else %>
+
+          <a><%= link_to "Login", new_user_session_path %></a> | 
+          <a><%= link_to "Create Account", new_user_registration_path %></a>
+
+        <% end %>
+        
+      </div>
+    </div>
+  </div>
+</nav>
