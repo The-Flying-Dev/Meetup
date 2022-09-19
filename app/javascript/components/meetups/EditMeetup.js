@@ -27,10 +27,10 @@ function EditMeetup() {
   
     function updateMeetupHandler(e) {
       e.preventDefault();
-      const apiUrl = `/api/v1/meetups/${id}/update`;
+      const apiUrl = `/api/v1/meetups/${id}`;
       fetch(apiUrl,     
         {
-          method: 'PUT',           
+          method: 'PATCH',           
           headers: {
             'Content-Type': 'application/json'
           }      
@@ -60,7 +60,7 @@ function EditMeetup() {
         </div>
         <div className={classes.control}>
           <label htmlFor='image'>Meetup Image</label>
-          <input type='url' required id='image' defaultValue={singleMeetup.url} />
+          <input type='url' id='image' defaultValue={singleMeetup.url} />
         </div>
         <div className={classes.control}>
           <label htmlFor='address'>Address</label>

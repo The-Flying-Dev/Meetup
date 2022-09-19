@@ -24,7 +24,7 @@ class Api::V1::MeetupsController < ApplicationController
   end
 
   def update 
-    if @meetup.update(meetup_params)
+    if @meetup.update!(meetup_params)
       render json: @meetup
     else   
       render json: @meetup.errors, status: :unprocessable_entity
