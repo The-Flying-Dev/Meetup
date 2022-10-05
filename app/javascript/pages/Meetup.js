@@ -76,7 +76,7 @@ function Meetup() {
       </ul>
       <Link to='/meetups'><button>Back to Meetups</button></Link>
       <button onClick={deleteMeetupHandler}>Delete Meetup</button>
-      <Link to={`/meetups/${id}/edit`}>Update Meetup</Link>
+      {/*<Link to={`/meetups/${id}/edit`}>Update Meetup</Link>*/}
     </div>
   );
 }

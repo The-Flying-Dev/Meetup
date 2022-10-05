@@ -8,10 +8,10 @@ function MeetupItem(props) {
    
 
   return (
-    <li key={props.id} className={classes.item} style={{width: "150px"}} >
+    <li key={props.id} className={classes.item} style={{width: "50vw"}} >
       <Card>
         <div className={classes.image}>
-          <img src={props.image} alt={props.title} style={{width: "150px"}} />
+          <img src={props.image} alt={props.title} style={{width: "50vw"}} />
         </div>
         <div className={classes.content}>
           <h3>{props.title}</h3>
